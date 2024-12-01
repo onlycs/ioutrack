@@ -5,14 +5,13 @@ use ndarray_npy::read_npy;
 
 fn run_sort_on_dets(dets: &Array2<f32>, frame_borders: &Array1<usize>) {
     let mut tracker = Sort::new(
-        25,
-        2,
-        0.3,
-        0.5,
-        [1., 1., 10., 10.],
-        [1., 1., 1., 1., 0.01, 0.01, 0.0001],
-    )
-    .0;
+        Some(25),
+        Some(2),
+        Some(0.3),
+        Some(0.5),
+        Some([1., 1., 10., 10.]),
+        Some([1., 1., 1., 1., 0.01, 0.01, 0.0001]),
+    );
     let mut first_i: usize = 0;
     for &last_i in frame_borders.iter() {
         tracker
@@ -35,16 +34,15 @@ pub fn criterion_mot_sort_benchmark(c: &mut Criterion) {
 
 fn run_bytetrack_on_dets(dets: &Array2<f32>, frame_borders: &Array1<usize>) {
     let mut tracker = ByteTrack::new(
-        25,
-        2,
-        0.3,
-        0.5,
-        0.5,
-        0.1,
-        [1., 1., 10., 10.],
-        [1., 1., 1., 1., 0.01, 0.01, 0.0001],
-    )
-    .0;
+        Some(25),
+        Some(2),
+        Some(0.3),
+        Some(0.5),
+        Some(0.5),
+        Some(0.1),
+        Some([1., 1., 10., 10.]),
+        Some([1., 1., 1., 1., 0.01, 0.01, 0.0001]),
+    );
     let mut first_i: usize = 0;
     for &last_i in frame_borders.iter() {
         tracker
